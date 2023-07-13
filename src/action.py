@@ -301,10 +301,10 @@ if __name__ == "__main__":
         subject = date.today().strftime("Personalized arXiv Digest, %d %b %Y")
         content = Content("text/html", body)
         mail = Mail(from_email, to_email, subject, content)
-        # mail_json = mail.get()
+        mail_json = mail.get()
 
         # Send an HTTP POST request to /mail/send
-        response = sg.send(mail)
+        response = sg.client.mail.send.post(request_body=mail_json)
         if response.status_code >= 200 and response.status_code <= 300:
             print("Send test email: Success!")
         else:
